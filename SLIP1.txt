@@ -1,0 +1,125 @@
+SLIP 1 
+Write a Java Program to implement I/O Decorator for converting uppercase letters to lower 
+case letters.
+Solution : 
+Createtest.txtfile which will contain String for coverting outside the package. 
+InputTest.java main file outside the package. 
+import DecoratorPackage.*; 
+import java.io.*; 
+public class InputTest { 
+ public static void main(String[] args) throws IOException { 
+ int c; 
+ try { 
+ InputStream in = new LowerCaseInputStream(new 
+BufferedInputStream(new FileInputStream("test.txt"))); 
+ while((c = in.read()) >= 0) { 
+ System.out.print((char)c); 
+ } 
+ in.close(); 
+ } catch (IOException e) { 
+ e.printStackTrace(); 
+ } 
+ } 
+} 
+Create Package DecoratorPackage and inside that write below file : 
+a) LowerCaseInputStream.java 
+package DecoratorPackage; 
+import java.io.*; 
+public class LowerCaseInputStream extends FilterInputStream { 
+ public LowerCaseInputStream(InputStream in) { 
+ super(in); 
+ } 
+ public int read() throws IOException { 
+ int c = super.read(); 
+ return (c == -1 ? c : Character.toLowerCase((char)c)); 
+ } 
+ 
+ public int read(byte[] b, int offset, int len) throws IOException { 
+ int result = super.read(b, offset, len); 
+ for (int i = offset; i<offset+result; i++) { 
+ b[i] = (byte)Character.toLowerCase((char)b[i]); 
+ } 
+ return result; 
+ } 
+} 
+Output :
+this is a file. // “THIS IS A FILE” Converted to Lower case
+________________________________________________________________
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+iris = pd.read_csv("Iris.csv")
+print (iris.head(10))
+iris.plot(kind ="scatter", x ='SepalLengthCm', y ='PetalLengthCm')
+plt.grid()
+________________________________________________________________
+
+Slip1:- Create an HTML form that contain the Student 
+Registration details and write a JavaScript to 
+validate Student first and last name 
+as it should not contain other than alphabets and age 
+should be between 18 to 50. 
+<html> 
+<head> 
+<script> 
+function validate() 
+{ 
+ fname=document.getElementById("fnm").value; 
+ lname=document.getElementById("lnm").value; 
+ age=document.getElementById("ag").value; 
+ mobile=document.getElementById("mb").value; 
+ address=document.getElementById("add").value; 
+ pincode=document.getElementById("pin").value; 
+ if(fname==""||lname==""||age==""||mobile==""||address==""|
+|pincode=="") 
+ { 
+ alert("Fields should not be empty"); 
+ return false; 
+ } 
+ else if(!fname.match(/^[A-Za-z]+$/)) 
+ { 
+ alert("First Name should contain only characters") 
+ return false; 
+ } 
+ else if(!lname.match(/^[A-Za-z]+$/)) 
+ { 
+ alert("Last Name should contain only characters") 
+ return false; 
+ } 
+ else if((age<18 || age>50)) 
+ { 
+ alert("Age not within range") 
+ return false; 
+ } 
+ 
+ else if(!mobile.match(/^\d{10}$/)) 
+ { 
+ alert("Mobile number Not valid") 
+ return false; 
+ } 
+ else if(!pincode.match(/^\d{6}$/)) 
+ { 
+ alert("Pin number Not valid") 
+ return false; 
+ } 
+ alert("Valid"); 
+ return true; 
+} 
+</script> 
+</head> 
+<body> 
+<form> 
+<h1>Student Registration Form</h1><br><br> 
+First Name : <input type=text id=fnm><br><br> 
+Last Name : <input type=text id=lnm><br><br> 
+Age : <input type=text id=ag><br><br> 
+Mobile No : <input type=text id=mb><br><br> 
+Address : <input type=text id=add><br><br> 
+Pincode : <input type=text id=pin><br><br> 
+<input type=submit value="SUBMIT" onClick="return validate()"> 
+<input type=reset value="Reset"> 
+</form> 
+</body> 
+</html> 
+__________________________________________________

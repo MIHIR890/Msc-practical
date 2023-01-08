@@ -1,0 +1,134 @@
+SLIP 5 
+Q.) Write a Java Program to implement Adapter pattern for Enumeration iterator:- 
+Solution:- 
+IteratorEnumerationTestDrive.java main file outside the package. 
+import iterenum.*; 
+import java.util.*; 
+public class IteratorEnumerationTestDrive { 
+ public static void main (String args[]) { 
+ ArrayList l = new ArrayList(Arrays.asList(args)); 
+ Enumeration enumeration = new IteratorEnumeration(l.iterator()); 
+ while (enumeration.hasMoreElements()) { 
+ System.out.println(enumeration.nextElement()); 
+ } 
+ } 
+} 
+EnumerationIteratorTestDrive.java main file outside the package. 
+import iterenum.*; 
+import java.util.*; 
+public class EnumerationIteratorTestDrive { 
+ public static void main (String args[]) { 
+ Vector v = new Vector(Arrays.asList(args)); 
+ Iterator iterator = new EnumerationIterator(v.elements()); 
+ while (iterator.hasNext()) { 
+ System.out.println(iterator.next()); 
+ } 
+ } 
+} 
+Create Package iterenum and inside that write below files : 
+a) EnumerationIterator.java 
+package iterenum; 
+import java.util.*; 
+public class EnumerationIterator implements Iterator { 
+ Enumeration enumeration; 
+ public EnumerationIterator(Enumeration enumeration) { 
+ this.enumeration = enumeration; 
+ } 
+ public booleanhasNext() { 
+ return enumeration.hasMoreElements(); 
+ } 
+ public Object next() { 
+ return enumeration.nextElement(); 
+ } 
+ public void remove() { 
+ throw new UnsupportedOperationException(); 
+ } 
+} 
+b)IteratorEnumeration.java 
+package iterenum; 
+import java.util.*; 
+public class IteratorEnumeration implements Enumeration { 
+ Iterator iterator; 
+ public IteratorEnumeration(Iterator iterator) { 
+ this.iterator = iterator; 
+ } 
+ public booleanhasMoreElements() { 
+ return iterator.hasNext(); 
+ } 
+ public Object nextElement() { 
+ return iterator.next(); 
+ } 
+} 
+______________________________________________________________________________
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+# Importing the dataset
+dataset = pd.read_csv('salary_data1.csv')
+X = dataset.iloc[:, :-1].values
+Y = dataset.iloc[:, 4].values
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, random_state = 0)
+
+dataset
+
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+
+x_new = [[5],[2],[1],[2]]
+y_pred = regressor.predict(np.array(x_new).reshape(1, 4))
+print(y_pred)
+accuracy = (regressor.score(X_test,y_test))
+print(accuracy)
+______________________________________________________________________________
+/* Slip5:- Using nodejs create a web page to read two 
+file names from user and append contents of first file 
+into second file. */ 
+var http = require('http'); 
+var fs = require('fs'); 
+var formidable=require('formidable'); 
+http.createServer(function(req, res) 
+{ 
+ if(req.url=='/') 
+ { 
+ res.writeHead(200, {'Content-Type': 'text/html'}); 
+ res.write('<form action="fapp" method="post" 
+enctype="multipart/form-data">'); 
+ res.write('<h1>SELECT TWO FILES</h1>'); 
+ res.write('<input type="file" name="rf"><br>'); 
+ res.write('<input type="file" name="wf"><br>'); 
+ res.write('<input type="submit">'); 
+ res.end(); 
+ } 
+ else if(req.url=='/fapp') 
+ { 
+ var form=new formidable.IncomingForm(); 
+ form.parse(req,function(err,fields,files) 
+ { 
+ if(!err) 
+ { 
+ var 
+w=fs.createWriteStream(files.wf.name,{flags:'a'}); 
+ var 
+r=fs.createReadStream(files.rf.name); 
+ w.on('close',function() 
+ { 
+ console.log("Writing Done"); 
+ }); 
+ r.pipe(w); 
+ res.write(files.rf.name); 
+ res.end("Append successfully"); 
+ } 
+ else 
+ { 
+ res.write("Error in writing"); 
+ } 
+ }); 
+ } 
+ else 
+ { 
+ res.end("page not found"); 
+ } 
+}).listen(8001);

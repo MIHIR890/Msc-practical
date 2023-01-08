@@ -1,0 +1,114 @@
+SLIP 2 
+Q)Write a Java Program to implement Singleton pattern for multithreading. 
+Solution:
+SingletonTestDrive.java main file outside the package. 
+import SingletonPackage.*; 
+public class SingletonTestDrive { 
+ public static void main(String[] args) { 
+ Singleton foo = CoolerSingleton.getInstance(); 
+ Singleton bar = HotterSingleton.getInstance(); 
+ System.out.println(foo); 
+ System.out.println(bar); 
+ } 
+} 
+Create Package SingletonPackage and inside that write below files : 
+a) CoolerSingleton.java 
+package SingletonPackage; 
+public class CoolerSingleton extends Singleton { 
+ // useful instance variables here 
+ protected static Singleton uniqueInstance; 
+ private CoolerSingleton() { 
+ super(); 
+ } 
+ // useful methods here 
+} 
+b)HotterSingleton.java 
+package SingletonPackage; 
+public class HotterSingleton extends Singleton { 
+ // useful instance variables here 
+ private HotterSingleton() { 
+ super(); 
+ } 
+ // useful methods here 
+} 
+c) Singleton.java 
+package SingletonPackage; 
+public class Singleton { 
+ protected static Singleton uniqueInstance; 
+ // other useful instance variables here 
+ protected Singleton() {} 
+ public static synchronized Singleton getInstance() { 
+ if (uniqueInstance == null) { 
+ uniqueInstance = new Singleton(); 
+ } 
+ return uniqueInstance; 
+ } 
+ // other useful methods here 
+} 
+Output : 
+SingletonPackage.Singleton@2a139a55 
+SingletonPackage.Singleton@2a139a55 
+___________________________________________________________________
+import numpy as np #used for handling numbers
+import pandas as pd #used for handling the dataset
+from sklearn.impute import SimpleImputer #used for handling missing data
+
+dataset = pd.read_csv('Data.csv')
+
+dataset
+
+X = dataset.iloc[:,:-1].values # attributes to determine dependent variable / Class
+Y = dataset.iloc[:,-1].values # dependent variable / Class
+
+imputer = SimpleImputer(missing_values = np.nan, strategy='mean')
+imputer = imputer.fit(X[:, -1:])
+
+X[:, 1:] = imputer.transform(X[:, 1:])
+print("Imputed Data : \n", X[:, 1:])
+____________________________________________________________________
+/* Slip2:- Create an HTML form that contain the 
+Employee Registration details and 
+ write a JavaScript to validate DOB, 
+Joining Date, and Salary. */ 
+<html> 
+<head> 
+<script> 
+function validate() 
+{ 
+ name=document.getElementById("nm").value; 
+ bdate=document.getElementById("bdt").value; 
+ jdate=document.getElementById("jdt").value; 
+ salary=document.getElementById("sal").value; 
+ if(name==""||bdate==""||jdate==""||salary=="") 
+ { 
+ alert("Fields should not be empty"); 
+ return false; 
+ } 
+ if(!name.match(/^[A-Za-z]+$/)) 
+ { 
+ alert("First Name should contain only characters") 
+ return false; 
+ } 
+ if(salary<10000) 
+ { 
+ alert("Salary not within range") 
+ return false; 
+ } 
+ alert("Valid"); 
+ return true; 
+} 
+</script> 
+</head> 
+<body> 
+<form> 
+<h1>Employee Registration Form</h1><br><br> 
+ Employee Name : <input type=text id=nm><br><br> 
+ Birth Date : <input type=text id=bdt><br><br> 
+ Joining Date : <input type=text id=jdt><br><br> 
+ Salary : <input type=text id=sal><br><br> 
+ <input type=submit value="SUBMIT" onClick="return 
+validate()"> 
+ <input type=reset value="Reset"> 
+</form> 
+</body> 
+</html>
